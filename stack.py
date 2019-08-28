@@ -11,8 +11,7 @@ class Stack:
 
     def pop(self):
         if not self.stack:
-            # raise IndexError('pop from an empty stack')
-            return None
+            raise IndexError('pop from an empty stack')
         else:
             return self.stack.pop()
 
