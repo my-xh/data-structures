@@ -98,15 +98,24 @@ class BinaryTree:
             new_queue = []
             temp = []
             for node in queue:
-                temp.append(node)
+                temp.append('{:<2}'.format(node.item) if node else 'N ')
                 if node is not None:
                     new_queue.append(node.left)
                     new_queue.append(node.right)
             res.append(temp)
             queue = new_queue
 
-        for line in res:
-            for node in line:
-                print(node, end=' ')
-            print()
-
+        n = len(res)
+        max_len = 2 ** (n - 1) * 3 - 1
+        for i in range(n - 1):
+            line = res[i]
+            t = 2
+            for _ in range(n - 2 - i):
+                t = t * 2 + 1
+            step = ''
+            if i != 0:
+                m = (max_len - len(line) * 2 - t * 2 + 1) // (len(line) - 1)
+                step = ' ' * m
+            pre = ' ' * t
+            print('{}{:}'.format(pre, step.join(line)))
+        print('{}'.format(' '.join(res[n - 1])))
